@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "id": "bedrock_restorer",
+  "version": "${version}",
+  "name": "Bedrock World Restorer",
+  "description": "Restores missing Java chunks directly from Bedrock LevelDB",
+  "authors": [
+    "Evgenii Sidorenko"
+  ],
+  "contact": {},
+  "license": "MIT",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.restoration.BedrockRestorerMod"
+    ]
+  },
+  "mixins": [
+    "bedrock_restorer.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.16.0",
+    "minecraft": ">=1.21.3",
+    "java": ">=21"
+  }
+}

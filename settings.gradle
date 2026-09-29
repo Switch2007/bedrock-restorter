@@ -1,0 +1,19 @@
+pluginManagement {
+    repositories {
+        maven {
+            name = 'Aliyun-Public'
+            url = 'https://maven.aliyun.com/repository/public'
+        }
+        maven {
+            name = 'BMCLAPI-Maven'
+            url = 'https://bmclapi2.bangbang93.com/maven'
+        }
+        maven {
+            name = 'Fabric'
+            url = 'https://maven.fabricmc.net/'
+        }
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+rootProject.name = 'bedrock_restorer'

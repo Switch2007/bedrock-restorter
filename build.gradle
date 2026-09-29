@@ -1,0 +1,59 @@
+plugins {
+    id 'fabric-loom' version '1.7-SNAPSHOT'
+    id 'maven-publish'
+}
+
+version = project.mod_version
+group = project.maven_group
+
+base {
+    archivesName = project.archives_base_name
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        name = 'Fabric'
+        url = 'https://maven.fabricmc.net/'
+    }
+    // Зеркало библиотек Mojang от BMCLAPI
+    maven {
+        name = 'BMCLAPI-Libraries'
+        url = 'https://bmclapi2.bangbang93.com/maven'
+    }
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings "net.fabricmc:yarn:${project.yarn_mappings}"
+    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+    // LevelDB (чистая Java-библиотека)
+    implementation 'org.iq80.leveldb:leveldb:0.12'
+    implementation 'org.iq80.leveldb:leveldb-api:0.12'
+    include 'org.iq80.leveldb:leveldb:0.12'
+    include 'org.iq80.leveldb:leveldb-api:0.12'
+
+    // Little-Endian NBT для Bedrock
+    implementation 'net.querz.nbt:nbt:6.1'
+    include 'net.querz.nbt:nbt:6.1'
+}
+
+processResources {
+    inputs.property "version", project.version
+
+    filesMatching("fabric.mod.json") {
+        expand "version": project.version
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.release = 21
+}
+
+java {
+    withSourcesJar()
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
